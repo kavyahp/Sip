@@ -1,3 +1,27 @@
+// Theme handling
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme') || 'light';
+body.setAttribute('data-theme', savedTheme);
+updateThemeIcon(savedTheme);
+
+// Theme toggle functionality
+themeToggle.addEventListener('click', () => {
+  const currentTheme = body.getAttribute('data-theme');
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  
+  body.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeIcon(newTheme);
+});
+
+function updateThemeIcon(theme) {
+  const icon = themeToggle.querySelector('i');
+  icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+}
+
 // Initialize chart
 let investmentChart;
 
@@ -42,6 +66,7 @@ const calculateSIP = (monthlyAmount, years, annualReturn) => {
 // Update chart with new data
 const updateChart = (results) => {
     const { totalInvestment, expectedReturns } = results;
+    const isDarkMode = body.getAttribute('data-theme') === 'dark';
     
     if (investmentChart) {
         investmentChart.destroy();
@@ -55,12 +80,12 @@ const updateChart = (results) => {
             datasets: [{
                 data: [totalInvestment, expectedReturns],
                 backgroundColor: [
-                    '#4299e1',
-                    '#48bb78'
+                    isDarkMode ? '#63b3ed' : '#4299e1',
+                    isDarkMode ? '#48bb78' : '#48bb78'
                 ],
                 borderColor: [
-                    '#3182ce',
-                    '#38a169'
+                    isDarkMode ? '#4299e1' : '#3182ce',
+                    isDarkMode ? '#38a169' : '#38a169'
                 ],
                 borderWidth: 1
             }]
@@ -74,7 +99,8 @@ const updateChart = (results) => {
                     labels: {
                         padding: 20,
                         font: {
-                            size: 14
+                            size: 14,
+                            color: isDarkMode ? '#cbd5e0' : '#4a5568'
                         }
                     }
                 },
@@ -86,7 +112,10 @@ const updateChart = (results) => {
                             const percentage = ((value / total) * 100).toFixed(1);
                             return `${context.label}: ${formatCurrency(value)} (${percentage}%)`;
                         }
-                    }
+                    },
+                    backgroundColor: isDarkMode ? '#2d3748' : '#ffffff',
+                    titleColor: isDarkMode ? '#f7fafc' : '#2d3748',
+                    bodyColor: isDarkMode ? '#cbd5e0' : '#4a5568'
                 }
             },
             cutout: '60%'
