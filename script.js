@@ -186,4 +186,37 @@ resetBtn.addEventListener('click', resetCalculator);
 });
 
 // Initial calculation
-handleCalculation(); 
+handleCalculation();
+
+// Modal handling
+const glossaryBtn = document.getElementById('glossaryBtn');
+const glossaryModal = document.getElementById('glossaryModal');
+const closeModalBtn = document.querySelector('.close-modal');
+
+// Open modal
+glossaryBtn.addEventListener('click', () => {
+  glossaryModal.classList.add('show');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+});
+
+// Close modal
+const closeModal = () => {
+  glossaryModal.classList.remove('show');
+  document.body.style.overflow = ''; // Restore scrolling
+};
+
+closeModalBtn.addEventListener('click', closeModal);
+
+// Close modal when clicking outside
+glossaryModal.addEventListener('click', (e) => {
+  if (e.target === glossaryModal) {
+    closeModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && glossaryModal.classList.contains('show')) {
+    closeModal();
+  }
+}); 

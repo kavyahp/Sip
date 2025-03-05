@@ -19,7 +19,12 @@
     </div>
     <div class="container">
       <div class="calculator-card">
-        <h1>SIP Calculator</h1>
+        <div class="header-section">
+          <h1>SIP Calculator</h1>
+          <button id="glossaryBtn" class="glossary-btn">
+            <i class="fas fa-book"></i> Glossary
+          </button>
+        </div>
         <div class="calculator-grid">
           <!-- Left Column -->
           <div class="input-section">
@@ -79,6 +84,60 @@
         </div>
       </div>
     </div>
+
+    <!-- Glossary Modal -->
+    <div id="glossaryModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Investment Glossary</h2>
+          <button class="close-modal" aria-label="Close glossary">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="glossary-item">
+            <h3>SIP (Systematic Investment Plan)</h3>
+            <p>
+              A method of investing a fixed amount regularly in mutual funds,
+              allowing you to build wealth over time through the power of
+              compounding.
+            </p>
+          </div>
+          <div class="glossary-item">
+            <h3>Mutual Fund</h3>
+            <p>
+              A professionally managed investment vehicle that pools money from
+              multiple investors to invest in a diversified portfolio of stocks,
+              bonds, or other securities.
+            </p>
+          </div>
+          <div class="glossary-item">
+            <h3>NAV (Net Asset Value)</h3>
+            <p>
+              The market value per share of a mutual fund, calculated by
+              dividing the total value of the fund's assets minus its
+              liabilities by the number of shares outstanding.
+            </p>
+          </div>
+          <div class="glossary-item">
+            <h3>Expense Ratio</h3>
+            <p>
+              The annual fee charged by mutual funds for managing your money,
+              expressed as a percentage of the fund's average assets under
+              management.
+            </p>
+          </div>
+          <div class="glossary-item">
+            <h3>CAGR (Compound Annual Growth Rate)</h3>
+            <p>
+              The annual rate of return on an investment, assuming the returns
+              are reinvested and compounded over time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <p>Made by Kavya Parekh ❤️</p>
       <a
