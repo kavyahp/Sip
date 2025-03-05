@@ -5,15 +5,73 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Light theme variables */
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f7fafc;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --border-color: #e2e8f0;
+  --accent-color: #4299e1;
+  --accent-hover: #3182ce;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 6px var(--shadow-color);
+  --footer-shadow: 0 -2px 4px var(--shadow-color);
+}
+
+[data-theme='dark'] {
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --bg-tertiary: #2d3748;
+  --text-primary: #f7fafc;
+  --text-secondary: #cbd5e0;
+  --border-color: #4a5568;
+  --accent-color: #63b3ed;
+  --accent-hover: #4299e1;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --card-shadow: 0 4px 6px var(--shadow-color);
+  --footer-shadow: 0 -2px 4px var(--shadow-color);
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
-  background-color: #f5f7fa;
-  color: #2d3748;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.theme-toggle button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.theme-toggle button:hover {
+  background-color: var(--bg-tertiary);
 }
 
 .container {
@@ -24,15 +82,16 @@ body {
 }
 
 .calculator-card {
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   padding: 2rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
   text-align: center;
-  color: #2d3748;
+  color: var(--text-primary);
   margin-bottom: 2rem;
   font-size: 2rem;
 }
@@ -57,25 +116,27 @@ h1 {
 
 label {
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
 }
 
 input {
   padding: 0.75rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   font-size: 1rem;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.3s, color 0.3s;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 input:focus {
   outline: none;
-  border-color: #4299e1;
+  border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
 button {
-  background-color: #4299e1;
+  background-color: var(--accent-color);
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -87,7 +148,7 @@ button {
 }
 
 button:hover {
-  background-color: #3182ce;
+  background-color: var(--accent-hover);
 }
 
 .chart-section {
@@ -103,9 +164,10 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7fafc;
+  background-color: var(--bg-tertiary);
   border-radius: 0.5rem;
   padding: 1rem;
+  transition: background-color 0.3s;
 }
 
 #investmentChart {
@@ -118,8 +180,9 @@ button:hover {
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  background-color: #f7fafc;
+  background-color: var(--bg-tertiary);
   border-radius: 0.5rem;
+  transition: background-color 0.3s;
 }
 
 .result-item {
@@ -127,12 +190,13 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
+  color: var(--text-primary);
 }
 
 .result-item.total {
   font-weight: 600;
   font-size: 1.1rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border-color);
   padding-top: 1rem;
   margin-top: 0.5rem;
 }
@@ -141,29 +205,30 @@ button:hover {
 .footer {
   text-align: center;
   padding: 1.5rem;
-  background-color: white;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+  background-color: var(--bg-secondary);
+  box-shadow: var(--footer-shadow);
   margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .footer p {
   margin: 0;
-  color: #4a5568;
+  color: var(--text-secondary);
 }
 
 .footer a {
-  color: #4a5568;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 1.5rem;
   transition: color 0.2s;
 }
 
 .footer a:hover {
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 /* Responsive Design */
@@ -196,5 +261,10 @@ button:hover {
 
   .footer a {
     font-size: 1.25rem;
+  }
+
+  .theme-toggle {
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }
