@@ -30,9 +30,17 @@ const monthlySIPInput = document.getElementById('monthlySIP');
 const durationInput = document.getElementById('duration');
 const returnRateInput = document.getElementById('returnRate');
 const calculateBtn = document.getElementById('calculateBtn');
+const resetBtn = document.getElementById('resetBtn');
 const totalInvestmentEl = document.getElementById('totalInvestment');
 const expectedReturnsEl = document.getElementById('expectedReturns');
 const totalValueEl = document.getElementById('totalValue');
+
+// Default values
+const defaultValues = {
+  monthlySIP: 5000,
+  duration: 10,
+  returnRate: 12
+};
 
 // Format currency to Indian Rupees
 const formatCurrency = (amount) => {
@@ -41,6 +49,28 @@ const formatCurrency = (amount) => {
         currency: 'INR',
         maximumFractionDigits: 0
     }).format(amount);
+};
+
+// Reset calculator
+const resetCalculator = () => {
+    // Reset input fields to default values
+    monthlySIPInput.value = defaultValues.monthlySIP;
+    durationInput.value = defaultValues.duration;
+    returnRateInput.value = defaultValues.returnRate;
+
+    // Reset results
+    totalInvestmentEl.textContent = formatCurrency(0);
+    expectedReturnsEl.textContent = formatCurrency(0);
+    totalValueEl.textContent = formatCurrency(0);
+
+    // Reset chart
+    if (investmentChart) {
+        investmentChart.destroy();
+        investmentChart = null;
+    }
+
+    // Recalculate with default values
+    handleCalculation();
 };
 
 // Calculate SIP returns
@@ -148,6 +178,7 @@ const handleCalculation = () => {
 
 // Event Listeners
 calculateBtn.addEventListener('click', handleCalculation);
+resetBtn.addEventListener('click', resetCalculator);
 
 // Real-time updates on input change
 [monthlySIPInput, durationInput, returnRateInput].forEach(input => {
